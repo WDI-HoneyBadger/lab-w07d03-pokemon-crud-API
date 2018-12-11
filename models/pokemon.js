@@ -58,4 +58,16 @@ pokemon.create = function(req, res, next){
     })
 }
 
+pokemon.delete = function(req, res, next){
+  db.none('DELETE FROM pokemon WHERE id=$1;', [req.params.id])
+    .then(function(){
+      console.log('successful delete');
+      next();
+    })
+    .catch(function(error){
+      console.log(error);
+      next();
+    })
+}
+
 module.exports = pokemon;

@@ -9,6 +9,7 @@ var port = 3000;
 // lesson it will log each request made to our server
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 
 // app level config ------------------------------------------------------
@@ -26,6 +27,8 @@ app.use(logger('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+
+app.use(methodOverride('_method'));
 
 // import our controllers
 app.get('/', function(req, res){

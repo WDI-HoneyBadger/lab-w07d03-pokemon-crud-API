@@ -58,6 +58,32 @@ pokemon.create = function(req, res, next){
     })
 }
 
+pokemon.update = function(req, res, next){
+  var pokeData = {
+    name: req.body.name,
+    type1: req.body.type1,
+    type2: req.body.type2 || "",
+    hitpoints: req.body.hitpoints,
+    attack: req.body.attack,
+    defense: req.body.defense,
+    speed: req.body.speed,
+    legendary: req.body.legendary === 'true' ? true : false,
+    img: req.body.img
+  }
+
+  db.one(`UPDATE pokemon SET name = $1, type1 = $2, type2 = $3, hitpoints = $4,
+  attack = $5, defense = $6, speed = $7, legendary = $8, img = $9 WHERE id = $10 RETURNING id;`, [pokeData.name, pokeData.type1, pokeData.type2, pokeData.hitpoints, pokeData.attack,
+    pokeData.defense, pokeData.speed, pokeData.legendary, pokeData.img, req.params.id])
+    .then(function(result) {
+      res.locals.pokemon_id = result.id;
+      next();
+    })
+    .catch(function(error){
+      console.log(error);
+      next();
+    })
+}
+
 pokemon.delete = function(req, res, next){
   db.none('DELETE FROM pokemon WHERE id=$1;', [req.params.id])
     .then(function(){

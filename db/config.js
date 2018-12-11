@@ -6,7 +6,7 @@ var config = {
   host: 'localhost',
   port: 5432,
   database: 'poke_pedia',
-  user: 'jackie' // your username here!!
+  user: 'trevorpreston' // your username here!!
 }
 
 var connection = pgInstance(config);

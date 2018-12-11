@@ -29,12 +29,30 @@ pokemon.find = function (req, res, next) {
 }
 
 pokemon.create = function(req, res, next){
-  db.one(`INSERT INTO pokemon(name, img) VALUES($1, $2) RETURNING id;`,
-         [req.body.name, req.body.img])
-    .then(function(result){
+  var pokeData = {
+    name: req.body.name,
+    type1: req.body.type1,
+    type2: req.body.type2 || "",
+    hitpoints: req.body.hitpoints,
+    attack: req.body.attack,
+    defense: req.body.defense,
+    speed: req.body.speed,
+    legendary: req.body.legendary === 'true' ? true : false,
+    img: req.body.img
+  }
+  console.log(req.body)
+  db.one(
+    `INSERT INTO pokemon
+    (name, type1, type2, hitpoints, attack, defense, speed, legendary, img) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;`,
+    [pokeData.name, pokeData.type1, pokeData.type2, pokeData.hitpoints, pokeData.attack,
+    pokeData.defense, pokeData.speed, pokeData.legendary, pokeData.img])
+    .then(function (result) {
+      console.log(result)
       res.locals.pokemon_id = result.id;
       next();
-    }).catch(function(error){
+    })
+    .catch(function (error) {
       console.log(error);
       next();
     })

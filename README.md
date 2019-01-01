@@ -23,11 +23,16 @@ Because we are developing an API there are a few things that have been changed:
 
 1. Look at the code that has been provided.  Take a look at the Pokemon model and refresh yourself with the methods we have there.  All these methods are still good and useable, you do not need to make any updates here.
 2. *Go to our controller and add routes for our CRUD functionality.*. Go through each step below in order.  Think about which model methods will be needed in each route!
+
      a.  `GET /pokemon` - returns all the pokemon in the database. Test this route in Postman.
+     
      b.  `GET /pokemon/:id` - returns a single pokemon from the database.  Test this route in Postman.
+     
      c.  `POST /pokemon` - adds a new pokemon to the database. Test this route by doing a POST request in Postman with a made up Pokemon.  Test this by doing a GET request to `/pokemon` and scroll to the bottom to see if the new Pokemon is there.
+     
      d.  `DELETE /pokemon/:id` - removes a pokemon from the database. Test this by doing a DELETE request in Postman to remove pokemon with id of 53 from the database (Psyduck).  Now do a GET request to `/pokemon` to make sure it worked.  You should see no Pokemon 53!
-     d.  `PUT /pokemon/:id` - edits an existing pokemon in the database.  Test this by doing a PUT request in Postman to edit pokemone with id of 25 from the database (Pikachu).  In your request change Pikachu's name to "Peekuhchoo".  After you updated the name do a GET request to `/pokemon/25` to make sure it worked.
+     
+     e.  `PUT /pokemon/:id` - edits an existing pokemon in the database.  Test this by doing a PUT request in Postman to edit pokemone with id of 25 from the database (Pikachu).  In your request change Pikachu's name to "Peekuhchoo".  After you updated the name do a GET request to `/pokemon/25` to make sure it worked.
 
 
 ## Check For Understanding:
